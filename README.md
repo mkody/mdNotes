@@ -4,13 +4,13 @@ Just to share some documents formated in Markdown format publicly.
 The extension choosen is `.md`. You can read more about the syntax here:
 http://daringfireball.net/projects/markdown/syntax
 
-The files are stored inside the `data/` folder. 
+The files are stored inside the `data/` folder.
 You can upload images inside and add them in your document.
 
 ## How to add and open a file
 - Upload a .md file inside the `data/` folder. Let's say a `exemple.md`
 - Go to the URL where the index.php is
-- Use this URL and add `?f=<FILE>`. `<FILE>` should be the name of the file without the extension. Like `exemple`.
+- Use this URL and add `?f=<FILE>`. `<FILE>` can have the .md extension or not. Like `?f=exemple` or `?f=exemple.md`.
 
 URL rewriting is available too, but I've inclued it only if you're using
 it at the root of your (sub-)domain.
@@ -20,7 +20,7 @@ By default, you'll need to share URL like `http://n.kdy.ch/?f=exemple` or `http:
 With some URL Rewriting, you can have URLs like `http://n.kdy.ch/exemple`
 
 ### Nginx Config
-You'll need to change or add this location bloc on your vHost, 
+You'll need to change or add this location bloc on your vHost,
 along with the rest (listen, server_name, root, index, php, ...)
 
 ```nginx
@@ -31,7 +31,7 @@ location / {
 ```
 
 ### Apache2
-Your vHost should have `AllowOverride All` inside his 
+Your vHost should have `AllowOverride All` inside his
 `<Directory /path/to/folder/>` bloc.
 
 You should enable mod_rewrite with `a2enmode rewrite` and restart Apache2, too.
