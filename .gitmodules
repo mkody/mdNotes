@@ -4,3 +4,6 @@
 [submodule "parsedown-extra"]
 	path = parsedown-extra
 	url = https://github.com/erusev/parsedown-extra
+[submodule "ParsedownFilter"]
+	path = ParsedownFilter
+	url = https://github.com/Chris--A/ParsedownFilter.git
