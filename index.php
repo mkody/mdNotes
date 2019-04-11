@@ -27,7 +27,7 @@ function ourFilters(&$el) {
 					return;
 				}
 			}
-                        // If the link doesn't share the host, then it's external
+			// If the link doesn't share the host, then it's external
 			if(strpos($url, $_SERVER["SERVER_NAME"]) === false) {
 				$el['attributes']['rel'] = 'noopener nofollow';
 				$el['attributes']['target'] = '_blank';
@@ -44,10 +44,10 @@ function ourFilters(&$el) {
 		case 'h5':
 		case 'h6':
 			// Create a slug and set as id of headings
-                        $pattern = '/[^a-z0-9àäéèêôõùüû\\-]/';
-                        $slug = strtolower($el['handler']['argument']);
-                        $slug = str_replace(' ', '-', $slug);
-                        $slug = preg_replace($pattern, '', $slug);
+			$pattern = '/[^a-z0-9àäéèêôõùüû\\-]/';
+			$slug = strtolower($el['handler']['argument']);
+			$slug = str_replace(' ', '-', $slug);
+			$slug = preg_replace($pattern, '', $slug);
 			$el['attributes']['id'] = $slug;
 			break;
 	}
