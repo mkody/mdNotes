@@ -44,10 +44,13 @@ function ourFilters(&$el) {
 		case 'h5':
 		case 'h6':
 			// Create a slug and set as id of headings
-			$pattern = '/[^a-z0-9àäéèêôõùüû\\-]/';
-			$slug = strtolower($el['handler']['argument']);
+			$pattern = '/[^A-Za-z0-9àäéèêôõùüû\\-]/';
+			$slug = $el['handler']['argument'];
 			$slug = str_replace(' ', '-', $slug);
 			$slug = preg_replace($pattern, '', $slug);
+			// Remove trimming or double "-"
+			$slug = preg_replace('/\-+/', '-', $slug);
+			if (substr($slug, -1) == '-') $slug = substr($slug, 0, -1);
 			$el['attributes']['id'] = $slug;
 			break;
 	}
@@ -78,11 +81,19 @@ There's nothing here...";
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notes <?php if(!empty($filename)) echo " > ". $filename; ?></title>
+<title>Notes<?php if(!empty($filename)) echo " > ". $filename; ?></title>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <style>
-	body {margin: 0 15px 50px;}
+	body {margin: 0 15px 50px; cursor: default;}
+	h2 {margin-bottom: 0; margin-left: -10px; padding: 10px;}
+	h2:target {background-color: yellow;}
+	a {cursor: pointer;}
+	li {margin: 2px 0;}
+	code {border: 1px solid #ccc;}
+	pre > code {border: none;}
 	td, th {padding: 0 5px;}
+	del {background: black; color: black; text-decoration: none;}
+	del:hover, del:active {color: white;}
 	/* I don't like when images are too high */
 	img {max-width: 100%; max-height: 400px; height: auto;}
 	.dl-md {position: absolute; right: 5px; top: 0;}
