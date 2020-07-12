@@ -37,6 +37,14 @@ function ourFilters(&$el) {
 			// Add lazy loading attribute to images
 			$el['attributes']['loading'] = 'lazy';
 			break;
+		case 'blockquote':
+			// Add bootstrap class
+			$el['attributes']['class'] = 'blockquote';
+			break;
+		case 'table':
+			// Add bootstrap class
+			$el['attributes']['class'] = 'table table-borderless table-hover table-sm';
+			break;
 		case 'h1':
 		case 'h2':
 		case 'h3':
@@ -82,16 +90,13 @@ There's nothing here...";
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notes<?php if(!empty($filename)) echo " > ". $filename; ?></title>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
 <style>
-	body {margin: 0 15px 50px; cursor: default;}
-	h2 {margin-bottom: 0; margin-left: -10px; padding: 10px;}
-	h2:target {background-color: yellow;}
+	body {margin: 15px; cursor: default;}
+	h2:target, h3:target, h4:target, h5:target, h6:target {background-color: yellow;}
 	a {cursor: pointer;}
-	li {margin: 2px 0;}
 	code {border: 1px solid #ccc;}
 	pre > code {border: none;}
-	td, th {padding: 0 5px;}
 	del {background: black; color: black; text-decoration: none;}
 	del:hover, del:active {color: white;}
 	/* I don't like when images are too high */
