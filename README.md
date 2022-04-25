@@ -1,38 +1,46 @@
 # mdNotes
-Just to share some documents formated in Markdown format publicly.
+Just to share some documents formated in Markdown publicly.
 
 The extension choosen is `.md`. You can read more about the syntax here:
 http://daringfireball.net/projects/markdown/syntax
 
 The files are stored inside the `data/` folder.
-You can upload images inside and add them in your document.
+
+For content that you want to embed (like images) I'd recommend to create a 
+separate folder (I use `host/`) next to the index.php file.  
+It can then be used that way: `![Embedded picture](/host/pic.jpg)`
 
 ## How to add and open a file
-- Upload a .md file inside the `data/` folder. Let's say a `exemple.md`
-- Go to the URL where the index.php is
-- Use this URL and add `?f=<FILE>`. `<FILE>` can have the .md extension or not. Like `?f=exemple` or `?f=exemple.md`.
+For this example we'll use `example.md` as the file 
+and `https://n.kdy.ch` as the base URL.
 
-URL rewriting is available too, but I've inclued it only if you're using
-it at the root of your (sub-)domain.
+- Upload your `.md` file inside the `data/` folder
+- Go to the URL where the index.php is, here `https://n.kdy.ch`
+- Append to the URL `?f=<FILE>`. `<FILE>` can have the .md extension or not. 
+  Like `?f=doc` or `?f=doc.md`. You should be able to now see your file.
+
+URL rewriting is available too, but I've inclued it only if you're using it at
+the root of your (sub-)domain.
 
 ## Nice URLs
-By default, you'll need to share URL like `http://n.kdy.ch/?f=exemple` or `http://n.kdy.ch/index.php?f=exemple` to open the exemple.md file.
-With some URL Rewriting, you can have URLs like `http://n.kdy.ch/exemple`
+By default, you'll need to share URLs like `https://n.kdy.ch/?f=example` or 
+`https://n.kdy.ch/index.php?f=example`.  
+With some URL rewriting we can make it prettier, like `https://n.kdy.ch/example`
 
 ### Nginx Config
-You'll need to change or add this location bloc on your vHost,
-along with the rest (listen, server_name, root, index, php, ...)
+You'll need to add or edit the `location / {}` inside your `server {}` block,
+along with your other properties (listen, server_name, root, index, php, ...):
 
 ```nginx
 location / {
-    # Check if a file exists, or route it to index.php.
+    # Check if a file exists, or route it to index.php
     try_files $uri $uri/ /index.php?f=$uri;
 }
 ```
 
 ### Apache2
 Your vHost should have `AllowOverride All` inside his
-`<Directory /path/to/folder/>` bloc.
+`<Directory /path/to/folder/>` node.
 
 You should enable mod_rewrite with `a2enmode rewrite` and restart Apache2, too.
 
