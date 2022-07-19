@@ -1,5 +1,5 @@
 # mdNotes
-Just to share some documents formated in Markdown publicly.
+Some stupid simple way to share rendred Markdown documents
 
 The extension choosen is `.md`. You can read more about the syntax here:
 http://daringfireball.net/projects/markdown/syntax
@@ -11,13 +11,14 @@ separate folder (I use `host/`) next to the index.php file.
 It can then be used that way: `![Embedded picture](/host/pic.jpg)`
 
 ## How to add and open a file
-For this example we'll use `example.md` as the file 
+For this example we'll use `doc.md` as the file
 and `https://n.kdy.ch` as the base URL.
 
-- Upload your `.md` file inside the `data/` folder
-- Go to the URL where the index.php is, here `https://n.kdy.ch`
-- Append to the URL `?f=<FILE>`. `<FILE>` can have the .md extension or not. 
-  Like `?f=doc` or `?f=doc.md`. You should be able to now see your file.
+- Upload your `.md` file inside the `data/` folder.
+- Go to the URL where the index.php is, i.e. `https://n.kdy.ch/`,
+  and append `?f=doc` to the URL. The .md extension is optional.  
+  The URL should now look like `https://n.kdy.ch/?f=doc`.
+- You should be able to now see your file.
 
 URL rewriting is available too, but I've inclued it only if you're using it at
 the root of your (sub-)domain.
