@@ -59,6 +59,8 @@ function ourFilters(&$el) {
 			// Remove double and trailing "-"
 			$slug = preg_replace('/\-+/', '-', $slug);
 			$slug = rtrim($slug, '-');
+			// Make it lowercase and set it
+			$slug = strtolower($slug);
 			$el['attributes']['id'] = $slug;
 			break;
 	}
