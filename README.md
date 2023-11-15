@@ -6,24 +6,24 @@ http://daringfireball.net/projects/markdown/syntax
 
 The files are stored inside the `data/` folder.
 
-For content that you want to embed (like images) I'd recommend to create a 
-separate folder (I use `host/`) next to the index.php file.  
-It can then be used that way: `![Embedded picture](/host/pic.jpg)`
+For content that you want to embed (like images), put them in the `data/` folder
+and reference them like that: `![Embedded picture](/data/pic.jpg)`
 
-## How to add and open a file
-For this example we'll use `doc.md` as the file
-and `https://n.kdy.ch` as the base URL.
+Please note that this documentation focuses on installations where mdNotes is
+used at the root of the domain.  
+Do your research to use in a subfolder and adapt the `/assets` imports.
 
-- Upload your `.md` file inside the `data/` folder.
-- Go to the URL where the index.php is, i.e. `https://n.kdy.ch/`,
-  and append `?f=doc` to the URL. The .md extension is optional.  
-  The URL should now look like `https://n.kdy.ch/?f=doc`.
-- You should be able to now see your file.
 
-URL rewriting is available too, but I've inclued it only if you're using it at
-the root of your (sub-)domain.
+## Installation
+- You'll need to have a working PHP environment and web server.  
+  Please use at least PHP 8.0.
+- Get a copy of this project:  
+  Either with `git clone https://git.rita.moe/kody/mdNotes.git`  
+  or [download a ZIP archive](https://git.rita.moe/kody/mdNotes/archive/master.zip).
+- Configure your web server to point to the mdNotes folder.
 
-## Nice URLs
+
+## URL Rewriting
 By default, you'll need to share URLs like `https://n.kdy.ch/?f=example` or 
 `https://n.kdy.ch/index.php?f=example`.  
 With some URL rewriting we can make it prettier, like `https://n.kdy.ch/example`
@@ -35,7 +35,7 @@ along with your other properties (listen, server_name, root, index, php, ...):
 ```nginx
 location / {
     # Check if a file exists, or route it to index.php
-    try_files $uri $uri/ /index.php?f=$uri;
+    try_files $uri $uri/ /index.php;
 }
 ```
 
@@ -45,4 +45,15 @@ Your vHost should have `AllowOverride All` inside his
 
 You should enable mod_rewrite with `a2enmode rewrite` and restart Apache2, too.
 
-Then, the .htaccess distributed here sould work.
+Then, the [`.htaccess`](./.htaccess) distributed here sould work.
+
+
+## How to add and open a file
+For this example we'll use `doc.md` as the file
+and `https://n.kdy.ch` as the base URL.
+
+- Upload your `.md` file inside the `data/` folder.
+- Type the base URL where the index.php is, i.e. `https://n.kdy.ch/`,
+  and append `?f=doc` to it. The .md extension is optional.  
+  The URL should now looks like `https://n.kdy.ch/?f=doc`.  
+  If you have [URL rewriting](#url-rewriting) set, `https://n.kdy.ch/doc` should work!

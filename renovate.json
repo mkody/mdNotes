@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":automergeTypes",
+    ":maintainLockFilesMonthly",
+    ":pinSkipCi",
+    ":rebaseStalePrs",
+    "group:allNonMajor",
+    "preview:dockerCompose",
+    "preview:dockerVersions"
+  ]
+}
