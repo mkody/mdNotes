@@ -1,7 +1,7 @@
 # mdNotes
 Some stupid simple way to share rendred Markdown documents
 
-The extension choosen is `.md`. You can read more about the syntax here:
+The extension choosen is `.md`. You can read more about the syntax here:  
 http://daringfireball.net/projects/markdown/syntax
 
 The files are stored inside the `data/` folder.
@@ -11,7 +11,7 @@ and reference them like that: `![Embedded picture](/data/pic.jpg)`
 
 Please note that this documentation focuses on installations where mdNotes is
 used at the root of the domain.  
-Do your research to use in a subfolder and adapt the `/assets` imports.
+Do your research to use in a subfolder and adapt the `/assets` paths.
 
 
 ## Installation
@@ -24,28 +24,29 @@ Do your research to use in a subfolder and adapt the `/assets` imports.
 
 
 ## URL Rewriting
-By default, you'll need to share URLs like `https://n.kdy.ch/?f=example` or 
-`https://n.kdy.ch/index.php?f=example`.  
-With some URL rewriting we can make it prettier, like `https://n.kdy.ch/example`
+By default, you have to use URLs like `https://n.kdy.ch/?f=example`  
+or `https://n.kdy.ch/index.php?f=example`.  
+With some rewriting we can make it prettier, like `https://n.kdy.ch/example`
 
 ### Nginx Config
-You'll need to add or edit the `location / {}` inside your `server {}` block,
-along with your other properties (listen, server_name, root, index, php, ...):
+Add or edit the `location / {}` inside your `server {}` block,
+next to with your other properties (listen, server_name, root, index, php, ...)
+to include this `try_files`:
 
 ```nginx
 location / {
-    # Check if a file exists, or route it to index.php
+    # Try to load as a file, a directory, or route it to index.php
     try_files $uri $uri/ /index.php;
 }
 ```
 
 ### Apache2
-Your vHost should have `AllowOverride All` inside his
+Your vHost should have `AllowOverride All` inside its
 `<Directory /path/to/folder/>` node.
 
-You should enable mod_rewrite with `a2enmode rewrite` and restart Apache2, too.
+Enable mod_rewrite with `a2enmode rewrite` and restart Apache2.
 
-Then, the [`.htaccess`](./.htaccess) distributed here sould work.
+Then, the [`.htaccess`](./.htaccess) distributed here should work.
 
 
 ## How to add and open a file
