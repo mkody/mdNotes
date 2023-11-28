@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    ":approveMajorUpdates",
     ":automergeLinters",
     ":automergeTesters",
     ":automergeTypes",
@@ -14,5 +13,13 @@
     "preview:dockerCompose",
     "preview:dockerVersions"
   ],
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "enabled": false,
+      "matchDepTypes": [
+        "engines"
+      ]
+    }
+  ]
 }
