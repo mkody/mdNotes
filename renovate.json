@@ -2,12 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
+    ":approveMajorUpdates",
+    ":automergeLinters",
+    ":automergeTesters",
     ":automergeTypes",
     ":maintainLockFilesMonthly",
     ":pinSkipCi",
     ":rebaseStalePrs",
     "group:allNonMajor",
+    "npm:unpublishSafe",
     "preview:dockerCompose",
     "preview:dockerVersions"
-  ]
+  ],
+  "rangeStrategy": "bump"
 }
