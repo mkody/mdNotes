@@ -8,6 +8,8 @@ on:
   pull_request:
     branches: [ "**" ]
 
+  workflow_dispatch:
+
 env:
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
 
@@ -15,7 +17,11 @@ jobs:
   build:
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
-    name: Build
+    name: Docker image
+
+    container:
+      image: catthehacker/ubuntu:act-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,7 +29,7 @@ jobs:
       - name: Get Meta
         id: repometa
         run: |
-          echo REGISTRY_DOMAIN=$(echo ${GITHUB_SERVER_URL} | sed 's\^https://\\') >> $GITHUB_OUTPUT          
+          echo REGISTRY_DOMAIN=$(echo ${GITHUB_SERVER_URL} | sed 's\^https://\\') >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -44,11 +50,11 @@ jobs:
         with:
           images: ${{ steps.repometa.outputs.REGISTRY_DOMAIN }}/${{ github.repository }}
           labels: |
-            org.opencontainers.image.revision=${{ env.SHA }}            
+            org.opencontainers.image.revision=${{ env.SHA }}
           tags: |
             type=edge,branch=$repo.default_branch
             type=sha,prefix=,suffix=,format=short
-            type=raw,value=latest,enable={{is_default_branch}}            
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -59,7 +65,7 @@ jobs:
           file: ./Dockerfile
           platforms: |
             linux/amd64
-            linux/arm64            
+            linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
