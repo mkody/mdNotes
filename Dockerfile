@@ -1,6 +1,6 @@
 FROM docker.io/library/alpine:3.19
 WORKDIR /app
-RUN apk add --no-cache php82
+RUN apk add --no-cache php
 COPY . /app
 
 EXPOSE 8080
