@@ -3,7 +3,7 @@
 /* Look if we provide the filename */
 $req = $_GET['f'] ?? '';
 if (
-  empty($path) && // If we didn't have anything in ?f=
+  empty($req) && // If we didn't have anything in ?f=
   !str_starts_with($_SERVER['REQUEST_URI'], '/index.php') // And it's not a call to index.php
 ) {
   // Use the subpath
