@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.21
+FROM docker.io/library/alpine:3.22
 WORKDIR /app
 RUN apk add --no-cache php
 COPY . /app
