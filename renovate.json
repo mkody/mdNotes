@@ -9,7 +9,7 @@
     ":pinSkipCi",
     ":rebaseStalePrs",
     "group:allNonMajor",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "preview:dockerCompose",
     "preview:dockerVersions"
   ],
